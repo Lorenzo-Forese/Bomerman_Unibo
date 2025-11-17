@@ -1,0 +1,42 @@
+#include <ncurses.h>
+#include "lang.h"
+#include "finestre.h"
+#include <cstring>
+using namespace std;
+
+class impostazioni{
+public:
+
+	void cambiolingua (Lang lingua,finestre mainwin){
+	refreshinterno_cambiolingua(lingua, mainwin);
+		while(char ch = getch() != 's' ){
+			switch (ch){
+				case 'd':
+					lingua.changelang(lingua.currlang+1);
+					refreshinterno_cambiolingua( lingua, mainwin );
+				break;
+				case 'a':
+					lingua.changelang(lingua.currlang-1);
+					refreshinterno_cambiolingua( lingua, mainwin );
+			}
+		} 
+	}
+	
+private:
+
+	void refreshinterno_cambiolingua(Lang lingua, finestre mainwin){
+		string line = " -- " + lingua.settings + " -- ";
+		char istruzioni[] = " Premi 'd' e 'a' per cambiare lingua ";
+		char istruzioni2[] = " Premi 's' per salvare"; 
+		mainwin.mainwin_refresh();
+		attron(A_BOLD | A_STANDOUT);
+		mvaddstr( 14 , (mainwin.scr_x - strlen(line.c_str()) - 8 ) /2 , line.c_str() );
+		attroff(A_BOLD | A_STANDOUT);
+		mvaddstr( 27 , (mainwin.scr_x - strlen(istruzioni)) /2 , istruzioni);
+		mvaddstr( 28 , (mainwin.scr_x - strlen(istruzioni2)) /2 , istruzioni2);
+		attron(A_UNDERLINE);
+		mvaddstr(24 , (mainwin.scr_x /2) , lingua.lang.c_str() ); 
+		attroff(A_UNDERLINE);
+	}
+
+};

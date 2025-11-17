@@ -1,12 +1,16 @@
 #include <ncurses.h>
 #include <string>
+#include "lang.h"
 using namespace std;
 
-class Lang{
+lang::lang{
 public:
 	string lang , newgame , leaderboard , settings , quit_game;
+	unsigned int stdlang = 0;
+	unsigned int currlang = stdlang;
 
-	void initlang(){
+	
+	lang::initlang(){
 		lang = langS[ stdlang ];
 		newgame = newgame_langs[ stdlang ];
 		leaderboard = leaderboard_langs[ stdlang ];
@@ -14,7 +18,8 @@ public:
 		quit_game = quit_game_langs[ stdlang ];
 	}
 
-	void changelang(int scelta){
+	lang::changelang(int scelta){
+		scelta = scelta %5 ;
 		currlang = scelta;
 		lang = langS[ currlang ];
 		newgame = newgame_langs[ currlang ];
@@ -25,7 +30,6 @@ public:
 
 
 private:
-	int stdlang = 0 , currlang = stdlang;
 	
 	string langS[5] = { "en" , "it" , "es" ,  "de" , "fr" } ;
 	string newgame_langs[5] = {
