@@ -13,8 +13,10 @@ void lang::initlang(){
 		quit_game = quit_game_langs[ stdlang ];
 	}
 
-void lang::changelang(int scelta){
-		currlang = scelta;
+void lang::changelang(int lingua_scelta){
+		if (lingua_scelta == 5) lingua_scelta = 0;
+		if (lingua_scelta == -1) lingua_scelta = 4;
+		currlang = lingua_scelta;
 		lingua = langS[ currlang ];
 		newgame = newgame_langs[ currlang ];
 		leaderboard = leaderboard_langs[ currlang ];

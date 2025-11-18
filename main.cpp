@@ -17,14 +17,18 @@ int main(){
 		return 0;
 	}
 	else{
+		int sel;
 		lingua.initlang();
-		while (int sel = Selezioni.Scelte(finestra , lingua) != 3){
+		do {
+			sel = Selezioni.Scelte(finestra,lingua);
 			switch ( sel ){
 				case 2:
 					impostazioni.cambiolingua(lingua , finestra );
 				break;
 			}
 		}
+		while ( sel != 3 );
+		endwin();
 	}
 	
 	

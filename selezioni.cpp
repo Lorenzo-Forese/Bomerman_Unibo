@@ -10,6 +10,10 @@ using namespace std;
 int selezioni::Scelte(finestre finestre, lang lingua){
 	int ch;
 	noecho();
+	for (int i = 3 ; i != -1 ; i--){
+		scelta = i;
+		evidenziato(finestre , lingua);
+	}
 	while ( (ch = getch()) != 'j' ){
 		switch(ch){
 			case 'w':
