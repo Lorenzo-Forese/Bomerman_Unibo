@@ -1,15 +1,17 @@
 #include <ncurses.h>
 #include "finestre.h"
-#include "selezioni.cpp"
+#include "selezioni.h"
 #include "lang.h"
 #include "impostazioni.cpp"
 using namespace std;
 
 int main(){
-	Lang lingua;
+	lang lingua;
 	finestre finestra ;
-	Selezioni Selezioni ;
+	selezioni Selezioni ;
 	impostazioni impostazioni;
+	noecho();
+	raw();
 	if (!finestra.initwin()){
 		endwin();
 		return 0;
@@ -20,9 +22,12 @@ int main(){
 			switch ( sel ){
 				case 2:
 					impostazioni.cambiolingua(lingua , finestra );
+				break;
 			}
 		}
-	endwin();
-	return 0;
 	}
+	
+	
+	return 0;
+	
 }

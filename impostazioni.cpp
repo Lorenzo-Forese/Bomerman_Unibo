@@ -7,7 +7,7 @@ using namespace std;
 class impostazioni{
 public:
 
-	void cambiolingua (Lang lingua,finestre mainwin){
+	void cambiolingua (lang lingua,finestre mainwin){
 	refreshinterno_cambiolingua(lingua, mainwin);
 		while(char ch = getch() != 's' ){
 			switch (ch){
@@ -24,7 +24,7 @@ public:
 	
 private:
 
-	void refreshinterno_cambiolingua(Lang lingua, finestre mainwin){
+	void refreshinterno_cambiolingua(lang lingua, finestre mainwin){
 		string line = " -- " + lingua.settings + " -- ";
 		char istruzioni[] = " Premi 'd' e 'a' per cambiare lingua ";
 		char istruzioni2[] = " Premi 's' per salvare"; 
@@ -35,7 +35,7 @@ private:
 		mvaddstr( 27 , (mainwin.scr_x - strlen(istruzioni)) /2 , istruzioni);
 		mvaddstr( 28 , (mainwin.scr_x - strlen(istruzioni2)) /2 , istruzioni2);
 		attron(A_UNDERLINE);
-		mvaddstr(24 , (mainwin.scr_x /2) , lingua.lang.c_str() ); 
+		mvaddstr(24 , (mainwin.scr_x /2) , lingua.lingua.c_str() ); 
 		attroff(A_UNDERLINE);
 	}
 
