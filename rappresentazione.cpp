@@ -1,10 +1,13 @@
 #include <ncurses.h>
 using namespace std;
 
+short MY_COLOR = 8; //dal 7 in su
+
 void stampaMuro(int x, int y){  //Muro
 	//attivazione colori
+	init_color( COLOR_WHITE, 600, 600, 600);
 	init_pair(2, COLOR_BLACK, COLOR_WHITE);  
-	attron( COLOR_PAIR(2));
+	attron(COLOR_PAIR(2));
 	//prima riga
 	mvaddch(y,x,ACS_ULCORNER);
 	mvaddch(y,x+1,ACS_TTEE);
@@ -23,6 +26,28 @@ void stampaMuro(int x, int y){  //Muro
 	mvaddch(y+2,x+1,ACS_BTEE);
 	mvaddch(y+2,x+2,ACS_LRCORNER);
 	attroff( A_UNDERLINE);
+	attroff( COLOR_PAIR(2));
+}
+
+void stampaMuroDistr(int x, int y){
+	attron (COLOR_PAIR(2) | A_BOLD | A_UNDERLINE );
+
+	mvaddch(y,x, ACS_PLUS);
+	mvaddch(y,x+1,ACS_NEQUAL);
+	mvaddch(y,x+2,ACS_PLUS);
+
+	//seconda riga
+	mvaddch(y+1,x,ACS_PLUS);
+	mvaddch(y+1,x+1,ACS_NEQUAL);
+	mvaddch(y+1,x+2,ACS_PLUS);
+
+	//attivazione riga sotto alla terza riga
+
+	//terza riga
+	mvaddch(y+2,x,ACS_PLUS);
+	mvaddch(y+2,x+1,ACS_NEQUAL);
+	mvaddch(y+2,x+2,ACS_PLUS);
+	attroff( A_UNDERLINE | A_BOLD);
 	attroff( COLOR_PAIR(2));
 }
 
@@ -127,6 +152,8 @@ int main(){
 			else if ( x == 3 && y == 3) stampaSprite(x,y);
 			else if ( x == 6 && y == 3) stampaKamiKaze(x,y);
 			else if ( x == 9 && y == 3) stampaBombarolo(x,y);
+			else if ( x == 12 && y == 3) stampaMuroDistr(x,y);
+			else if ( x == 15 && y == 3) stampaMuroDistr(x,y);
 			else if ( i == 16 || j == 8) stampaMuro(x,y);
 			else if ( y %2 == 0 && x %2 == 0)stampaMuro(x,y);
 			else  stampaErba(x,y);
