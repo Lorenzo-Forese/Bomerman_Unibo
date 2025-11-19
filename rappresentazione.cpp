@@ -63,7 +63,7 @@ void stampaErba(int x , int y){
 	attron(A_BOLD);
 	mvaddch(y+1,x+1,ACS_CKBOARD);
 	attroff(A_BOLD);
-	mvaddch(y+1,x+2,ACS_CKBOARD);
+	mvaddch(y+1,x+2,'|');
 
 	mvaddch(y+2,x,ACS_CKBOARD);
 	mvaddch(y+2,x+1,ACS_CKBOARD);
@@ -139,7 +139,7 @@ void stampaBombarolo(int x, int y){
 }
 
 
-int main(){
+/*int main(){
 	cbreak();
 	initscr();
 	start_color();
@@ -166,3 +166,4 @@ int main(){
 	endwin();
 	return 0;
 }
+*/
