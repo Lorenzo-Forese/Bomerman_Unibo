@@ -1,0 +1,1 @@
+g++ main.cpp finestre.cpp impostazioni.cpp lang.cpp selezioni.cpp mapparandom.cpp -lncurses -o main
