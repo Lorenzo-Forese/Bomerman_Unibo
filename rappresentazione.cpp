@@ -5,7 +5,6 @@ short MY_COLOR = 8; //dal 7 in su
 
 void stampaMuro(int x, int y){  //Muro
 	//attivazione colori
-	init_color( COLOR_WHITE, 600, 600, 600);
 	init_pair(2, COLOR_BLACK, COLOR_WHITE);  
 	attron(COLOR_PAIR(2));
 	//prima riga
@@ -201,6 +200,105 @@ void stampaFuoco(int x , int y){
 	attroff( COLOR_PAIR(4));
 	
 }
+
+void stampaOro(int x , int y){
+	init_pair(9, COLOR_YELLOW, COLOR_GREEN);
+	attron( COLOR_PAIR(3));
+
+	mvaddch(y,x,ACS_CKBOARD);
+	mvaddch(y,x+1,ACS_CKBOARD);
+	mvaddch(y,x+2,'~');
+
+	mvaddch(y+1,x,ACS_CKBOARD);
+	attron(COLOR_PAIR(9) | A_BOLD);
+	mvaddch(y+1,x+1,'$');
+	attroff(COLOR_PAIR(9) | A_BOLD);
+	attroff(A_BOLD);
+	attron( COLOR_PAIR(3));
+	mvaddch(y+1,x+2,'|');
+
+	mvaddch(y+2,x,ACS_CKBOARD);
+	mvaddch(y+2,x+1,ACS_CKBOARD);
+	mvaddch(y+2,x+2,'.');
+
+	attroff( COLOR_PAIR(3));
+}
+
+void stampaLuckyBox(int x, int y , int mult){
+	int price = mult * 50;
+	init_pair(10, COLOR_YELLOW, COLOR_GREEN);  
+	attron(COLOR_PAIR(10));
+		//prima riga
+	mvaddch(y,x,ACS_ULCORNER);
+	mvaddch(y,x+1,ACS_TTEE);
+	mvaddch(y,x+2,ACS_URCORNER);
+		
+	//seconda riga
+	mvaddch(y+1,x,ACS_LTEE);
+	mvaddch(y+1,x+1,'?');
+	mvaddch(y+1,x+2,ACS_RTEE);
+		
+	//attivazione riga sotto alla terza riga
+	attron(A_UNDERLINE);
+		
+	//terza riga
+
+	mvaddch(y+2,x+1,ACS_HLINE);
+	mvaddch(y+2,x+2,ACS_HLINE);
+	mvprintw(y+2,x,"%d",price);
+	attroff( A_UNDERLINE);
+	attroff( COLOR_PAIR(10));
+			
+}
+
+void stampaPorta(int x, int y){
+
+	init_pair(11, COLOR_YELLOW, COLOR_BLACK);  
+	attron(COLOR_PAIR(11));
+		//prima riga
+	mvaddch(y,x,ACS_ULCORNER);
+	mvaddch(y,x+1,ACS_HLINE);
+	mvaddch(y,x+2,ACS_URCORNER);
+		
+	//seconda riga
+	mvaddch(y+1,x,ACS_VLINE);
+	mvaddch(y+1,x+1,' ');
+	mvaddch(y+1,x+2,ACS_VLINE);
+		
+	//attivazione riga sotto alla terza riga
+	attron(A_UNDERLINE);
+		
+	//terza riga
+	mvaddch(y+2,x,ACS_LLCORNER);
+	mvaddch(y+2,x+1,ACS_HLINE);
+	mvaddch(y+2,x+2,ACS_LRCORNER);
+	attroff( A_UNDERLINE);
+	attroff( COLOR_PAIR(11));
+			
+}
+
+void stampaCuore(int x, int y){
+		attron( COLOR_PAIR(3));
+	
+		mvaddch(y,x,ACS_CKBOARD);
+		mvaddch(y,x+1,ACS_CKBOARD);
+		mvaddch(y,x+2,'~');
+	
+		mvaddch(y+1,x,ACS_CKBOARD);
+		attroff(COLOR_PAIR(3));
+		attron(COLOR_PAIR (4));
+		mvaddch(y+1,x+1,'+');
+		attroff(COLOR_PAIR(4));
+		attron ( COLOR_PAIR(3));
+		mvaddch(y+1,x+2,'|');
+	
+		mvaddch(y+2,x,'5');
+		mvaddch(y+2,x+1,'5');
+		mvaddch(y+2,x+2,'0');
+	
+		attroff( COLOR_PAIR(3));
+}
+
 /*int main(){
 	cbreak();
 	initscr();

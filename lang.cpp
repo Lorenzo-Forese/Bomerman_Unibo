@@ -13,7 +13,7 @@ void lang::initlang(){
 		quit_game = quit_game_langs[ stdlang ];
 		money = money_langs [ stdlang ];
 		skip = skip_langs [ stdlang ];
-		start_over = start_over_langs [ stdlang ];
+		insert_name = insert_name_langs [ stdlang ];
 	}
 
 void lang::changelang(int lingua_scelta){
@@ -27,7 +27,7 @@ void lang::changelang(int lingua_scelta){
 		quit_game = quit_game_langs[ currlang ];
 		money = money_langs [ currlang ];
 		skip = skip_langs [ currlang ];
-		start_over = start_over_langs [ currlang ];
+		insert_name = insert_name_langs [ currlang ];
 		
 	}
 

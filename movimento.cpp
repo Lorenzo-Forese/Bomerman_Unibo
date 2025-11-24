@@ -2,7 +2,7 @@
 #include <queue>
 
 using namespace std;
-
+/*
 struct npc{
 	bool vivo;
 	int pos_x;
@@ -12,7 +12,12 @@ struct npc{
 };
 typedef npc* p_npc;
 
-
+struct lista_npc{
+	lista_npc* head;
+	npc* npc_curr;
+};
+typedef lista_npc* plista_npc;
+*/
 class movimento{
 
 public:
@@ -22,9 +27,6 @@ public:
 		}
 	
 	int protag_x = 0 , protag_y = 0 , spawn = 0;
-	int numvite = 3;
-	int bombdisp = 1;
-	int soldi = 0;
 	
 	void startingpos( int spawncorner ){
 
@@ -58,11 +60,12 @@ public:
 		}
 	}
 
-	void protag(mappaRandom &mappa, int dir ){
+	void protag(mappaRandom &mappa, int dir , float difficulty){
 		switch (dir){
 		case 'w':
 
-			if ( mappa.mappa [protag_y - 1] [protag_x] == 0 ) {
+			if ( mappa.mappa [protag_y - 1] [protag_x] == 0 ||  mappa.mappa [protag_y - 1] [protag_x] >= 15 ) {
+			if ( mappa.mappa [protag_y - 1] [protag_x] == 15 ) mappa.soldi = mappa.soldi + ( 100 * difficulty );
 			mappa.mappa[protag_y] [protag_x] = 0 ;
 			protag_y -- ;
 			mappa.mappa[protag_y] [protag_x] = 3 ;
@@ -72,7 +75,13 @@ public:
 
 		case 'a':
 
-			if ( mappa.mappa[ protag_y ] [ protag_x - 1] == 0 ){
+			if ( mappa.mappa[ protag_y ] [ protag_x - 1] == 0 || mappa.mappa[ protag_y ] [ protag_x - 1] >= 15 ){
+			if ( mappa.mappa[ protag_y ] [ protag_x - 1] == 15 ) mappa.soldi = mappa.soldi + ( 100 * difficulty) ;
+			if ( mappa.mappa[ protag_y ] [ protag_x - 1] >= 17 && ( ( mappa.mappa[ protag_y ] [ protag_x - 1] - 16) * 50 ) <= mappa.soldi ){
+				mappa.soldi = mappa.soldi - ( (mappa.mappa[ protag_y ] [ protag_x - 1] - 16) * 50 );
+				mappa.potenzaBombe++;
+				if ( mappa.mappa[ protag_y ] [ protag_x - 1] == 27 ) {mappa.potenzaBombe -- ; mappa.numVite ++;}
+			}
 			mappa.mappa[protag_y] [protag_x] = 0;
 			protag_x--;
 			mappa.mappa[protag_y] [protag_x] = 3;
@@ -81,7 +90,8 @@ public:
 
 		case 's':
 
-			if ( mappa.mappa [ protag_y + 1 ] [ protag_x ] == 0){
+			if ( mappa.mappa [ protag_y + 1 ] [ protag_x ] == 0 || mappa.mappa [ protag_y + 1 ] [ protag_x ] >= 15 ){
+			if ( mappa.mappa [ protag_y + 1 ] [ protag_x ] == 15) mappa.soldi = mappa.soldi + ( 100 * difficulty);
 			mappa.mappa[protag_y] [protag_x] = 0;
 			protag_y++;
 			mappa.mappa[protag_y] [protag_x] = 3;
@@ -90,7 +100,13 @@ public:
 
 		case 'd':
 
-			if ( mappa.mappa [ protag_y ] [ protag_x + 1] == 0){
+			if ( mappa.mappa [ protag_y ] [ protag_x + 1] == 0 ||  mappa.mappa [ protag_y ] [ protag_x + 1] >= 15 ){
+			if (  mappa.mappa [ protag_y ] [ protag_x + 1] == 15 ) mappa.soldi = mappa.soldi + ( 100 * difficulty);
+			if ( mappa.mappa[ protag_y ] [ protag_x + 1] >= 17 && ( ( mappa.mappa[ protag_y ] [ protag_x + 1] - 16) * 50 ) <= mappa.soldi ){
+				mappa.soldi = mappa.soldi - ( (mappa.mappa[ protag_y ] [ protag_x + 1] - 16) * 50 );
+				mappa.potenzaBombe ++;
+				if ( mappa.mappa[ protag_y ] [ protag_x + 1] == 27 ) {mappa.potenzaBombe -- ; mappa.numVite ++;}
+			}
 			mappa.mappa[protag_y] [protag_x] = 0;
 			protag_x++;
 			mappa.mappa[protag_y] [protag_x] = 3;
@@ -99,6 +115,7 @@ public:
 
 		case 'b':
 			int ch = getch();
+			if (mappa.numBombe > 0){
 			switch ( ch ){
 						
 				case 'w':
@@ -130,10 +147,77 @@ public:
 					
 			
 			}
+			}
 		}
 	}
 
-	void npc ( mappaRandom &mappa ,p_npc nemico){
+
+	int spawnMultiple_NPC( mappaRandom &mappa, int spawn , float difficulty ){
+		int num_NPC = 0;
+		difficulty = difficulty / 4;
+		switch( spawn ){
+			case 0:
+				for ( int j = 6 ; j > 1 ; j -- ){
+					for ( int i = 14 ; i >=2 ; i --){
+						if ( mappa.mappa [j][i] <= 1 ){
+							if ( mappa.randBool ( difficulty )){
+								bool npc_type = mappa.randBool(difficulty);
+								if ( npc_type ) mappa.mappa[j][i] = 5 ;
+								if( !npc_type ) mappa.mappa[j][i] = 4;
+								num_NPC ++;
+							}
+						} 
+					}
+				}
+			break;
+			case 1:
+					for ( int j = 6 ; j > 1 ; j -- ){
+						for ( int i = 1 ; i <=14 ; i ++){
+							if ( mappa.mappa [j][i] <= 1 ){
+								if ( mappa.randBool ( difficulty )){
+									bool npc_type = mappa.randBool(difficulty);
+									if( npc_type )  mappa.mappa[j][i] = 5 ;
+									if( !npc_type ) mappa.mappa[j][i] = 4 ;
+									num_NPC ++;
+								}
+							}
+						}
+					}
+			break;
+			case 2:
+				for ( int j = 1 ; j <= 6 ; j ++ ){
+					for ( int i = 14 ; i > 1 ; i --){
+						if ( mappa.mappa [j][i] <= 1 ){
+							if ( mappa.randBool ( difficulty )){
+								bool npc_type = mappa.randBool(difficulty);
+								if ( npc_type ) mappa.mappa[j][i] = 5 ;
+								if( !npc_type ) mappa.mappa[j][i] = 4;
+								num_NPC ++;
+							}
+						} 
+					}
+				}
+			break;
+			case 3:
+				for ( int j = 1 ; j <= 6 ; j ++ ){
+					for ( int i = 1 ; i <= 14 ; i ++){
+						if ( mappa.mappa [j][i] <= 1 ){
+							if ( mappa.randBool ( difficulty )){
+								bool npc_type = mappa.randBool(difficulty);
+								if(	npc_type ) mappa.mappa[j][i] = 5 ;
+								if( !npc_type ) mappa.mappa[j][i] = 4;
+								num_NPC ++;
+								}
+						} 
+					}
+				}
+			break;
+			
+		}
+		return num_NPC;
+	}
+	
+/*	void npc ( mappaRandom &mappa ,p_npc nemico){
 		if ( nemico == nullptr ) return;
 		npc ( mappa , nemico->next);
 
@@ -141,12 +225,12 @@ public:
 			if ( nemico -> type == 0 ) kamikaze(mappa , nemico );
 			if ( nemico -> type == 1 ) bombarolo(mappa , nemico );
 		}
-
+*/
 private:
 
-	void kamikaze ( mappaRandom &mappa , p_npc nemico ){}
+//	void kamikaze ( mappaRandom &mappa , p_npc nemico ){}
 
-	void bombarolo ( mappaRandom &mappa , p_npc nemico ){}		
+//	void bombarolo ( mappaRandom &mappa , p_npc nemico ){}		
 	
 };
 

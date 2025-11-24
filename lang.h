@@ -6,7 +6,7 @@ using namespace std;
 class lang{
 public:
 	std::string lingua , newgame, leaderboard , settings , quit_game
-			,	money , skip , start_over ;
+			,	money , skip , insert_name ;
 	unsigned int stdlang  = 0 , currlang = stdlang ;
 		
 	void initlang();
@@ -35,8 +35,8 @@ private:
 	std::string skip_langs[5] = {
 		"Skip" , "Salta" , "Salta" , "überspringen" , "Sauter"
 	};
-	std::string start_over_langs[5] = {
-		"Start over?" , "Ricomincia?" , "Neustart?" , "Redémarrer?"
+	std::string insert_name_langs[5] = {
+		"Insert name:" , "Inserire nome:" , "Insertar nombre:" , "Name einfügen" , "Insérer le nom:"
 	};
 };
 

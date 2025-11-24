@@ -37,28 +37,14 @@ using namespace std;
 		else return false;
 	}
 
-	void finestre::gameWin(lang &lingua ,int charpos_x ,int charpos_y){
+	void finestre::gameWin(lang &lingua ){
+		start_color();
 		gamewin_posy =  (scr_y - mainwin_y )/2 + 9 ;
 		gamewin_posx =  (scr_x - mainwin_x) /2 + (mainwin_x /8) ;
 		finestraGioco = newwin( dim_y , dim_x , gamewin_posy , gamewin_posx );
-		start_color();
-		init_pair(2, COLOR_WHITE , COLOR_BLACK);
-		wattron(finestraGioco, COLOR_PAIR(2) | A_REVERSE);
-		wborder(finestraGioco,
-		    ACS_VLINE ,
-		    ACS_VLINE ,
-		    ACS_HLINE ,
-		    ACS_HLINE ,
-		    ACS_ULCORNER ,
-		    ACS_URCORNER ,
-		    ACS_LLCORNER ,
-		    ACS_LRCORNER 
-		);
+		box(finestraGioco , 0 ,0 );
 		move(0,0);
-		wattroff(finestraGioco , COLOR_PAIR(2) | A_REVERSE);
 		mvaddstr( gamewin_posy + 2, gamewin_posx + 54 , lingua.money.c_str() );
-		mvaddstr( gamewin_posy + 3, gamewin_posx + 54 , to_string(charpos_x).c_str() );
-		mvaddstr( gamewin_posy + 4, gamewin_posx + 54 , to_string(charpos_y).c_str() );
 		wrefresh (finestraGioco);
 		
 	}

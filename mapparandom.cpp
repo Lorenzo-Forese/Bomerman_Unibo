@@ -31,37 +31,101 @@ using namespace std;
 	int spawnCorner = randInt( 0 , 3);
 
 	spawn (spawnCorner);
-
+	
 	return spawnCorner;
 }
 
+	void mappaRandom::randShop(){
+	for(int i = 1 ; i <= 15 ; i++ ){         
+		for(int j = 1 ; j<= 7 ; j++){
+			if ( i %2 != 0 || j%2 != 0){
+			
+				mappa[j][i] = 0;
+			}
+		}
+	}
+	for (int i = 2; i <= 14 ; i = i + 2){
+		if ( i == 8 ) i = i + 2;
+		mappa[3][i] = randInt(17,27);
+	}
+	mappa[1][8] = 16;
+	mappa[5][8] = 3;
+}
 
-	void mappaRandom::printMappa( finestre &finestra ){
+	void mappaRandom::printMappa( finestre &finestra , int &numNemici ,int &score){
+		int pos_soldi_x =  finestra.gamewin_posx + 53 ;
+		int pos_soldi_y =  finestra.gamewin_posy + 3 ;
+		int cuoriDisplayed = 0; 
+		init_pair(7 , COLOR_YELLOW , COLOR_BLACK);
+		init_pair(8 , COLOR_RED , COLOR_BLACK);
+		attron (COLOR_PAIR(7));
+		mvaddch( pos_soldi_y  , pos_soldi_x , '$');
+		for ( int i = 1 ; i <= 4 ; i ++ ){
+			mvaddch( pos_soldi_y , pos_soldi_x + i , ' ');
+		}
+		mvprintw( pos_soldi_y , pos_soldi_x  + 1 , "%d" , soldi);
+		attroff (COLOR_PAIR(7));
+
+			for(int y = 0 ; y <= 21 && cuoriDisplayed < numVite ; y++){
+
+				for ( int x = 0 ;  x <= 7  ; x++ ){
+					if ( cuoriDisplayed < numVite ) {
+						attron(COLOR_PAIR(8) );
+						mvaddch( pos_soldi_y + 3 + y , pos_soldi_x + x, '+');
+						attroff(COLOR_PAIR(8) );
+						cuoriDisplayed++;
+						}
+						else mvaddch( pos_soldi_y + 3 + y , pos_soldi_x + x, ' ');
+				}
+			}
+
+		mvprintw ( pos_soldi_y + 2 , pos_soldi_x, "%d" , score);
+		
+		
+
 		int y = finestra.gamewin_posy + 1;
 		for ( int j = 0 ; j <= 8 ; j++){
 			int x = finestra.gamewin_posx + 1;
 				for ( int i = 0 ; i <= 16 ; i++){
 					if ( mappa[j][i] == 2 ) stampaMuro(x,y) ;
-					else if ( mappa[j][i] == 3 ) stampaProtag(x,y) ; 
+					else if ( mappa[j][i] == 3 ) stampaProtag(x,y) ;
+					else if ( mappa[j][i] == 4 ) stampaKamiKaze(x,y) ;
+					else if ( mappa[j][i] == 5 ) stampaBombarolo(x,y) ;  
 					else if ( mappa[j][i] == 0 ) stampaErba(x,y) ;
 					else if ( mappa[j][i] == 8 ) { stampaBomba_1(x,y) ; mappa[j][i] = 9; }
 					else if ( mappa[j][i] == 9 ) { stampaBomba_2(x,y) ; mappa[j][i] = 10; }
 					else if ( mappa[j][i] == 10 ) { stampaBomba_1(x,y) ; mappa[j][i] = 11; }
 					else if ( mappa[j][i] == 11 ) { stampaBomba_2(x,y) ; mappa[j][i] = 12; }
 					else if ( mappa[j][i] == 12 ) { 
-					for (int b = 1 ; b <= potenzaBombe && mappa[j - b][i] < 2 ; b++){
+					for (int b = 1 ; b <= potenzaBombe ; b++){
+						if ( mappa[j - b][i] == 1) score = score + 10;
+						if ( mappa[j - b][i] == 2) { break ;}
+						if ( mappa[j - b][i] == 3) { numVite -- ; break; }
+						if ( mappa[j - b][i] == 4 || mappa[j - b][i] == 5 ){ mappa [j - b][i] = 15 ; numNemici -- ; score = score + 30 ; break; }
 					 	stampaFuoco ( x , y - (b*3));
 					 	mappa[j - b][i] = 14; 
 						}
-					for (int b = 1 ; b <= potenzaBombe && mappa[j + b][i] < 2 ; b++){
+					for (int b = 1 ; b <= potenzaBombe ; b++){
+						if ( mappa[j + b][i] == 1 ) score = score + 10;
+						if ( mappa[j + b][i] == 2 ) { break; };
+						if ( mappa[j + b][i] == 3 ) { numVite -- ; break; }
+						if ( mappa[j + b][i] == 4 || mappa[j + b][i] == 5 ){ mappa [j + b][i] = 15 ; numNemici -- ; score = score + 30 ; break;}
 						stampaFuoco ( x , y + (b*3) );
 						mappa[j + b][i] = 14;
 						}
-					for (int b = 1 ; b <= potenzaBombe && mappa[j][i - b] < 2 ; b++){
+					for (int b = 1 ; b <= potenzaBombe ; b++){
+						if ( mappa[j][i - b] == 1 ) score = score + 10;
+						if ( mappa[j][i - b] == 2 ) { break;}
+						if ( mappa[j][i - b] == 3 ) { numVite -- ; break;}
+						if ( mappa[j][i - b] == 4 || mappa[j][i - b] == 5 ){ mappa [j][i - b] = 15 ; numNemici -- ; score = score + 30 ; break;}
 						stampaFuoco ( x - (b*3) , y );
 						mappa[j][i - b] = 14;
 						}
-					for (int b = 1 ; b <= potenzaBombe && mappa[j][i + b] < 2 ; b++){
+					for (int b = 1 ; b <= potenzaBombe ; b++){
+						if ( mappa[j][i + b] == 1 ) score = score + 10;
+						if ( mappa[j][i + b] == 2 ){ break ; }
+						if ( mappa[j][i + b] == 3 ){ numVite -- ; break ;}
+						if ( mappa[j][i + b] == 4 || mappa[j][i + b] == 5 ){ mappa [j][i + b] = 15 ; numNemici -- ; score = score + 30 ; break;}
 						stampaFuoco ( x + (b*3) , y );
 						mappa[j][i + b] = 14;
 						}
@@ -70,6 +134,18 @@ using namespace std;
 					}
 					else if(mappa[j][i] == 14){
 						mappa [j][i] = 0;
+					}
+					else if(mappa[j][i] == 15){
+						stampaOro(x,y);
+					}
+					else if(mappa[j][i] == 16){
+						stampaPorta(x,y);
+					}
+					else if( mappa[j][i] >= 17 && mappa[j][i] <= 26 ){
+						stampaLuckyBox( x , y , mappa[j][i] - 16 );
+					}
+					else if( mappa[j][i] == 27 ){
+						stampaCuore(x,y);
 					}
 
 					else stampaMuroDistr(x,y);

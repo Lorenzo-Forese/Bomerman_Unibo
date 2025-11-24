@@ -14,15 +14,21 @@ public:
 
 	int randMappa( float prob );
 
+	int soldi = 30;
+	
+	int numBombe = 1;
+
+	int numVite = 3;
+
 	int potenzaBombe = 1;
 	
-	unsigned int  mappa[9][17]{
-		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}, // 0 = erba
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2}, // 1 = muro distruttibile
-		{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2}, // 2 = muro indistruttibile
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2}, // 3 = ..
-		{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2}, // 4 = ..
-		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+	int  mappa[9][17]{
+		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}, // 0 = Erba
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2}, // 1 = Muro distruttibile
+		{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2}, // 2 = Muro indistruttibile
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2}, // 3 = Protagonista
+		{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2}, // 4 = Nemico 1  //KamiKaze
+		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2}, // 5 = Nemico 2  //Bombarolo
 		{2,0,2,0,2,0,2,0,2,0,2,0,2,0,2,0,2},
 		{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
 		{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
@@ -31,7 +37,9 @@ public:
 	
 	random_device rd;
 
-	void printMappa( finestre &finestra );	
+	void printMappa( finestre &finestra , int &numNemici , int &score);
+
+	void randShop ();	
 
 private:
 
