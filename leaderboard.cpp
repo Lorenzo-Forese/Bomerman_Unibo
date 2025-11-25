@@ -1,6 +1,7 @@
 #include "finestre.h"
 #include <fstream>
-
+#include <vector>
+#include <iostream>
 using namespace std;
 
 void ScriviSuLeaderboard( string newName , int newScore){
@@ -74,7 +75,7 @@ void ScriviSuLeaderboard( string newName , int newScore){
 
 void print_file_in_window(WINDOW *win) {
 	string filename = "leaderboard.txt";
-    std::ifstream infile(filename);
+    ifstream infile(filename);
     if (!infile) {
         // If the file could not be opened, display an error message in the window
         wprintw(win, "Error opening file: %s\n", filename.c_str());
@@ -82,7 +83,7 @@ void print_file_in_window(WINDOW *win) {
         return;
     }
 
-    std::string line;
+    string line;
     int y = 9;  // Row position in the window
     int max_y, max_x;
 

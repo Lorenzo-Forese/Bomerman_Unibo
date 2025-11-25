@@ -15,8 +15,6 @@ public:
 	int randMappa( float prob );
 
 	int soldi = 30;
-	
-	int numBombe = 1;
 
 	int numVite = 3;
 
@@ -37,7 +35,7 @@ public:
 	
 	random_device rd;
 
-	void printMappa( finestre &finestra , int &numNemici , int &score);
+	void printMappa( finestre &finestra , int &numNemici , int &score , int timeLeft);
 
 	void randShop ();	
 

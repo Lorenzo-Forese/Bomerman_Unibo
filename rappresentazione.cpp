@@ -136,6 +136,41 @@ void stampaBombarolo(int x, int y){
 	mvaddch(y+2,x+2,ACS_URCORNER);
 	attroff(A_BOLD);	
 }
+void stampaBombaroloDisarmato1(int x, int y){
+	init_pair(5, COLOR_MAGENTA , COLOR_GREEN);
+	attron (COLOR_PAIR(5));
+	mvaddch(y,x, '"');
+	mvaddch(y,x+2, '"');;
+	attron (COLOR_PAIR(5) | A_UNDERLINE | A_BOLD);
+	mvaddch(y,x+1, 'U');
+	attroff (A_UNDERLINE );
+	mvaddch(y+1,x,ACS_ULCORNER);
+	mvaddch(y+1,x+1,ACS_PLUS);
+	mvaddch(y+1,x+2,ACS_LRCORNER);
+		
+	mvaddch(y+2,x,ACS_ULCORNER);
+	mvaddch(y+2,x+1,ACS_BTEE);
+	mvaddch(y+2,x+2,ACS_URCORNER);
+	attroff(A_BOLD);	
+}
+
+void stampaBombaroloDisarmato2(int x, int y){
+	init_pair(5, COLOR_MAGENTA , COLOR_GREEN);
+	attron (COLOR_PAIR(5));
+	mvaddch(y,x+2, '"');
+	mvaddch(y,x, '"');;
+	attron (COLOR_PAIR(5) | A_UNDERLINE | A_BOLD);
+	mvaddch(y,x+1, 'U');
+	attroff (A_UNDERLINE );
+	mvaddch(y+1,x,ACS_LLCORNER);
+	mvaddch(y+1,x+1,ACS_PLUS);
+	mvaddch(y+1,x+2,ACS_URCORNER);
+		
+	mvaddch(y+2,x,ACS_ULCORNER);
+	mvaddch(y+2,x+1,ACS_BTEE);
+	mvaddch(y+2,x+2,ACS_URCORNER);
+	attroff(A_BOLD);	
+}
 
 void stampaBomba_1(int x , int y){
 	init_pair(3, COLOR_WHITE, COLOR_GREEN);

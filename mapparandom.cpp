@@ -52,9 +52,11 @@ using namespace std;
 	mappa[5][8] = 3;
 }
 
-	void mappaRandom::printMappa( finestre &finestra , int &numNemici ,int &score){
+	void mappaRandom::printMappa( finestre &finestra , int &numNemici ,int &score , int timeLeft){
 		int pos_soldi_x =  finestra.gamewin_posx + 53 ;
 		int pos_soldi_y =  finestra.gamewin_posy + 3 ;
+		mvaddstr( finestra.gamewin_posy , finestra.gamewin_posx + 13 , "     ");
+		mvprintw( finestra.gamewin_posy , finestra.gamewin_posx + 13 , "%d" , timeLeft);
 		int cuoriDisplayed = 0; 
 		init_pair(7 , COLOR_YELLOW , COLOR_BLACK);
 		init_pair(8 , COLOR_RED , COLOR_BLACK);
@@ -89,8 +91,13 @@ using namespace std;
 				for ( int i = 0 ; i <= 16 ; i++){
 					if ( mappa[j][i] == 2 ) stampaMuro(x,y) ;
 					else if ( mappa[j][i] == 3 ) stampaProtag(x,y) ;
-					else if ( mappa[j][i] == 4 ) stampaKamiKaze(x,y) ;
-					else if ( mappa[j][i] == 5 ) stampaBombarolo(x,y) ;  
+					else if ( mappa[j][i] == 4 ) stampaKamiKaze(x,y);
+					else if ( mappa[j][i] == 6 ) stampaKamiKaze(x,y);
+					else if ( mappa[j][i] == 5 ) stampaBombarolo(x,y) ;
+					else if ( mappa[j][i] == 7 ) {
+					if( j % 2 == 0 || i % 2 == 0 ) stampaBombaroloDisarmato1(x,y);
+					else stampaBombaroloDisarmato2(x,y);
+					} 
 					else if ( mappa[j][i] == 0 ) stampaErba(x,y) ;
 					else if ( mappa[j][i] == 8 ) { stampaBomba_1(x,y) ; mappa[j][i] = 9; }
 					else if ( mappa[j][i] == 9 ) { stampaBomba_2(x,y) ; mappa[j][i] = 10; }
@@ -101,7 +108,8 @@ using namespace std;
 						if ( mappa[j - b][i] == 1) score = score + 10;
 						if ( mappa[j - b][i] == 2) { break ;}
 						if ( mappa[j - b][i] == 3) { numVite -- ; break; }
-						if ( mappa[j - b][i] == 4 || mappa[j - b][i] == 5 ){ mappa [j - b][i] = 15 ; numNemici -- ; score = score + 30 ; break; }
+						if ( mappa[j - b][i] == 4 || mappa[j - b][i] == 6 ){ mappa [j - b][i] = 15 ; numNemici -- ; score = score + 30 ; break;}
+						if ( mappa[j - b][i] == 5 || mappa[j - b][i] == 7 ){ mappa [j - b][i] = 15 ; numNemici -- ; score = score + 50 ; break;}
 					 	stampaFuoco ( x , y - (b*3));
 					 	mappa[j - b][i] = 14; 
 						}
@@ -109,7 +117,8 @@ using namespace std;
 						if ( mappa[j + b][i] == 1 ) score = score + 10;
 						if ( mappa[j + b][i] == 2 ) { break; };
 						if ( mappa[j + b][i] == 3 ) { numVite -- ; break; }
-						if ( mappa[j + b][i] == 4 || mappa[j + b][i] == 5 ){ mappa [j + b][i] = 15 ; numNemici -- ; score = score + 30 ; break;}
+						if ( mappa[j + b][i] == 4 || mappa[j + b][i] == 6 ){ mappa [j + b][i] = 15 ; numNemici -- ; score = score + 30 ; break;}
+						if ( mappa[j + b][i] == 5 || mappa[j + b][i] == 7 ){ mappa [j + b][i] = 15 ; numNemici -- ; score = score + 50 ; break;}
 						stampaFuoco ( x , y + (b*3) );
 						mappa[j + b][i] = 14;
 						}
@@ -117,7 +126,8 @@ using namespace std;
 						if ( mappa[j][i - b] == 1 ) score = score + 10;
 						if ( mappa[j][i - b] == 2 ) { break;}
 						if ( mappa[j][i - b] == 3 ) { numVite -- ; break;}
-						if ( mappa[j][i - b] == 4 || mappa[j][i - b] == 5 ){ mappa [j][i - b] = 15 ; numNemici -- ; score = score + 30 ; break;}
+						if ( mappa[j][i - b] == 4 || mappa[j][i - b] == 6 ){ mappa [j][i - b] = 15 ; numNemici -- ; score = score + 30 ; break;}
+						if ( mappa[j][i - b] == 5 || mappa[j][i - b] == 7 ){ mappa [j][i - b] = 15 ; numNemici -- ; score = score + 50 ; break;}
 						stampaFuoco ( x - (b*3) , y );
 						mappa[j][i - b] = 14;
 						}
@@ -125,7 +135,8 @@ using namespace std;
 						if ( mappa[j][i + b] == 1 ) score = score + 10;
 						if ( mappa[j][i + b] == 2 ){ break ; }
 						if ( mappa[j][i + b] == 3 ){ numVite -- ; break ;}
-						if ( mappa[j][i + b] == 4 || mappa[j][i + b] == 5 ){ mappa [j][i + b] = 15 ; numNemici -- ; score = score + 30 ; break;}
+						if ( mappa[j][i + b] == 4 || mappa[j][i + b] == 6 ){ mappa [j][i + b] = 15 ; numNemici -- ; score = score + 30 ; break;}
+						if ( mappa[j][i + b] == 5 || mappa[j][i + b] == 7 ){ mappa [j][i + b] = 15 ; numNemici -- ; score = score + 50 ; break;}
 						stampaFuoco ( x + (b*3) , y );
 						mappa[j][i + b] = 14;
 						}

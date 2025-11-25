@@ -34,7 +34,10 @@ int main(){
 						finestra.mainwin_refresh();
 						mvaddstr( finestra.mainwin_y / 2 , (finestra.mainwin_x + strlen(lingua.insert_name.c_str())) / 2 , lingua.insert_name.c_str());
 						char nome[100] ;
+						timeout(-1);
+						echo();
 						getstr(nome);
+						noecho();
 						ScriviSuLeaderboard( nome , score );
 						wclear(finestra.mainwin);
 						wrefresh(finestra.mainwin);

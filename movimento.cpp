@@ -115,7 +115,6 @@ public:
 
 		case 'b':
 			int ch = getch();
-			if (mappa.numBombe > 0){
 			switch ( ch ){
 						
 				case 'w':
@@ -147,7 +146,7 @@ public:
 					
 			
 			}
-			}
+			
 		}
 	}
 
@@ -161,9 +160,7 @@ public:
 					for ( int i = 14 ; i >=2 ; i --){
 						if ( mappa.mappa [j][i] <= 1 ){
 							if ( mappa.randBool ( difficulty )){
-								bool npc_type = mappa.randBool(difficulty);
-								if ( npc_type ) mappa.mappa[j][i] = 5 ;
-								if( !npc_type ) mappa.mappa[j][i] = 4;
+								mappa.mappa[j][i] = mappa.randInt(4,5);
 								num_NPC ++;
 							}
 						} 
@@ -175,9 +172,7 @@ public:
 						for ( int i = 1 ; i <=14 ; i ++){
 							if ( mappa.mappa [j][i] <= 1 ){
 								if ( mappa.randBool ( difficulty )){
-									bool npc_type = mappa.randBool(difficulty);
-									if( npc_type )  mappa.mappa[j][i] = 5 ;
-									if( !npc_type ) mappa.mappa[j][i] = 4 ;
+									mappa.mappa[j][i] = mappa.randInt(4,5);
 									num_NPC ++;
 								}
 							}
@@ -189,9 +184,7 @@ public:
 					for ( int i = 14 ; i > 1 ; i --){
 						if ( mappa.mappa [j][i] <= 1 ){
 							if ( mappa.randBool ( difficulty )){
-								bool npc_type = mappa.randBool(difficulty);
-								if ( npc_type ) mappa.mappa[j][i] = 5 ;
-								if( !npc_type ) mappa.mappa[j][i] = 4;
+								mappa.mappa[j][i] = mappa.randInt(4,5);
 								num_NPC ++;
 							}
 						} 
@@ -203,9 +196,7 @@ public:
 					for ( int i = 1 ; i <= 14 ; i ++){
 						if ( mappa.mappa [j][i] <= 1 ){
 							if ( mappa.randBool ( difficulty )){
-								bool npc_type = mappa.randBool(difficulty);
-								if(	npc_type ) mappa.mappa[j][i] = 5 ;
-								if( !npc_type ) mappa.mappa[j][i] = 4;
+								mappa.mappa[j][i] = mappa.randInt(4,5);
 								num_NPC ++;
 								}
 						} 

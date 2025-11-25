@@ -14,6 +14,7 @@ void lang::initlang(){
 		money = money_langs [ stdlang ];
 		skip = skip_langs [ stdlang ];
 		insert_name = insert_name_langs [ stdlang ];
+		time = time_langs [ stdlang ];
 	}
 
 void lang::changelang(int lingua_scelta){
@@ -28,6 +29,7 @@ void lang::changelang(int lingua_scelta){
 		money = money_langs [ currlang ];
 		skip = skip_langs [ currlang ];
 		insert_name = insert_name_langs [ currlang ];
+		time = time_langs [ currlang ];
 		
 	}
 

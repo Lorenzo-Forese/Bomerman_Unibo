@@ -44,6 +44,7 @@ using namespace std;
 		finestraGioco = newwin( dim_y , dim_x , gamewin_posy , gamewin_posx );
 		box(finestraGioco , 0 ,0 );
 		move(0,0);
+		mvaddstr( gamewin_posy , gamewin_posx + 7 , lingua.time.c_str() );
 		mvaddstr( gamewin_posy + 2, gamewin_posx + 54 , lingua.money.c_str() );
 		wrefresh (finestraGioco);
 		

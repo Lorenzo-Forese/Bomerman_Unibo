@@ -6,7 +6,7 @@ using namespace std;
 class lang{
 public:
 	std::string lingua , newgame, leaderboard , settings , quit_game
-			,	money , skip , insert_name ;
+			,	money , skip , insert_name , time ;
 	unsigned int stdlang  = 0 , currlang = stdlang ;
 		
 	void initlang();
@@ -37,6 +37,9 @@ private:
 	};
 	std::string insert_name_langs[5] = {
 		"Insert name:" , "Inserire nome:" , "Insertar nombre:" , "Name einfügen" , "Insérer le nom:"
+	};
+	std::string time_langs[5] = {
+		"Time: " , "Tempo: " , "Tiempo: " , "Zeit: " , "Temps: "
 	};
 };
 
