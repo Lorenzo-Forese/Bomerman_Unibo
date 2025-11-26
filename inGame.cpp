@@ -46,6 +46,7 @@ bool inGame(finestre &finestra , lang &lingua , int &score){
 			ch = getch();
 			movimento.protag(mappa , ch , difficulty);
 			mappa.printMappa(finestra , numNemici , score , 0);
+			if (mappa.numVite == 0 ) return false;
 		}
 		difficulty = difficulty + 0.05;
 		int startpos = mappa.randMappa( difficulty );
