@@ -16,4 +16,4 @@ la dimensione della finestra per tutta la durata del programma.
 COMANDI : 
 wasd - movimento
 j - conferma nel menu
-b - piazza bombe
+b + wasd - piazza bombe in una qualsiasi direzione non ostruita
