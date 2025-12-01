@@ -12,7 +12,7 @@ void leaderboard::ScriviSuLeaderboard( string newName , int newScore){
 	int scores[MAX];            // array of integers
 	int count = 0;
 	
-	ifstream infile("leaderboard.txt");
+	ifstream infile("../leaderboard.txt");
 	    if (infile) {
 	        while (count < MAX && infile >> names[count] >> scores[count]) {
 	            count++;
@@ -64,7 +64,7 @@ void leaderboard::ScriviSuLeaderboard( string newName , int newScore){
 	    }
 	
 	    // ----- Rewrite entire file -----
-	    std::ofstream outfile("leaderboard.txt");
+	    std::ofstream outfile("../leaderboard.txt");
 	    for (int i = 0; i < count; i++) {
 	        outfile << names[i] << " " << scores[i] << "\n";
 	    }
@@ -75,7 +75,7 @@ void leaderboard::ScriviSuLeaderboard( string newName , int newScore){
 }
 
 void leaderboard::print_file_in_window(WINDOW *win) {
-	string filename = "leaderboard.txt";
+	string filename = "../leaderboard.txt";
     ifstream infile(filename);
     if (!infile) {
         // If the file could not be opened, display an error message in the window
