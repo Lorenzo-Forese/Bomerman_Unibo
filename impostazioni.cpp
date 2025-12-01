@@ -1,13 +1,12 @@
 #include <ncurses.h>
-#include "lang.h"
-#include "finestre.h"
+#include "include/impostazioni.h"
+#include "include/lang.h"
+#include "include/finestre.h"
 #include <cstring>
 using namespace std;
 
-class impostazioni{
-public:
 
-	void cambiolingua (lang &lingua,finestre mainwin){
+	void impostazioni::cambiolingua (lang &lingua,finestre mainwin){
 	mainwin.mainwin_refresh();
 	refreshinterno_cambiolingua(lingua, mainwin);
 	int ch;
@@ -25,9 +24,8 @@ public:
 		mainwin.mainwin_refresh(); 
 	}
 	
-private:
 
-	void refreshinterno_cambiolingua(lang lingua, finestre mainwin){
+	void impostazioni::refreshinterno_cambiolingua(lang lingua, finestre mainwin){
 		int winpos = (mainwin.scr_y - mainwin.mainwin_y ) /2 ;
 		string line = " -- " + lingua.settings + " -- ";
 		char istruzioni[] = " <-- [d]      [s]      [a] --> ";
@@ -43,4 +41,4 @@ private:
 		attroff(A_UNDERLINE);
 	}
 
-};
+

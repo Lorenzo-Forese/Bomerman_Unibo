@@ -1,4 +1,5 @@
-#include "mapparandom.h"
+#include "include/mapparandom.h"
+#include "include/movimento.h"
 #include <queue>
 
 using namespace std;
@@ -18,49 +19,46 @@ struct lista_npc{
 };
 typedef lista_npc* plista_npc;
 */
-class movimento{
 
-public:
 
-	void piazzaBomba(mappaRandom &mappa , int bomb_y , int bomb_x ){
+void movimento::piazzaBomba(mappaRandom &mappa , int bomb_y , int bomb_x ){
 			mappa.mappa[bomb_y][bomb_x] = 8;
 		}
 	
-	int protag_x = 0 , protag_y = 0 , spawn = 0;
 	
-	void startingpos( int spawncorner ){
+void movimento::startingpos( int spawncorner ){
 
 	spawn = spawncorner;
 
-		if ( spawncorner == 0 ){ // Angolo in alto a sx
+	if ( spawncorner == 0 ){ // Angolo in alto a sx
 
-			protag_x = 1;
-			protag_y = 1;
+		protag_x = 1;
+		protag_y = 1;
 			
-		}
-
-		if ( spawncorner == 1 ){ // Angolo in alto a dx
-
-			protag_x = 15;
-			protag_y = 1;
-		
-		}
-
-		if ( spawncorner == 2 ){ // angolo in basso a sx
-
-			protag_x = 1;
-			protag_y = 7;
-		
-		}
-
-		if ( spawncorner == 3 ){ // angolo in basso a dx
-
-			protag_x = 15;
-			protag_y = 7;
-		}
 	}
 
-	void protag(mappaRandom &mappa, int dir , float difficulty){
+	if ( spawncorner == 1 ){ // Angolo in alto a dx
+
+		protag_x = 15;
+		protag_y = 1;
+		
+	}
+
+	if ( spawncorner == 2 ){ // angolo in basso a sx
+
+		protag_x = 1;
+		protag_y = 7;
+		
+	}
+
+	if ( spawncorner == 3 ){ // angolo in basso a dx
+
+		protag_x = 15;
+		protag_y = 7;
+	}
+}
+
+	void movimento::protag(mappaRandom &mappa, int dir , float difficulty){
 		switch (dir){
 		case 'w':
 
@@ -151,7 +149,7 @@ public:
 	}
 
 
-	int spawnMultiple_NPC( mappaRandom &mappa, int spawn , float difficulty ){
+	int movimento::spawnMultiple_NPC( mappaRandom &mappa, int spawn , float difficulty ){
 		int num_NPC = 0;
 		difficulty = difficulty / 4;
 		switch( spawn ){
@@ -208,20 +206,4 @@ public:
 		return num_NPC;
 	}
 	
-/*	void npc ( mappaRandom &mappa ,p_npc nemico){
-		if ( nemico == nullptr ) return;
-		npc ( mappa , nemico->next);
-
-			if ( nemico -> vivo == false ) return;
-			if ( nemico -> type == 0 ) kamikaze(mappa , nemico );
-			if ( nemico -> type == 1 ) bombarolo(mappa , nemico );
-		}
-*/
-private:
-
-//	void kamikaze ( mappaRandom &mappa , p_npc nemico ){}
-
-//	void bombarolo ( mappaRandom &mappa , p_npc nemico ){}		
-	
-};
 

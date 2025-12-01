@@ -1,10 +1,11 @@
-#include "finestre.h"
+#include "include/finestre.h"
+#include "include/leaderboard.h"
 #include <fstream>
 #include <vector>
 #include <iostream>
 using namespace std;
 
-void ScriviSuLeaderboard( string newName , int newScore){
+void leaderboard::ScriviSuLeaderboard( string newName , int newScore){
 
 	const int MAX = 50;        // maximum number of records
 	char names[MAX][50];        // array of C-strings
@@ -73,7 +74,7 @@ void ScriviSuLeaderboard( string newName , int newScore){
 	
 }
 
-void print_file_in_window(WINDOW *win) {
+void leaderboard::print_file_in_window(WINDOW *win) {
 	string filename = "leaderboard.txt";
     ifstream infile(filename);
     if (!infile) {
