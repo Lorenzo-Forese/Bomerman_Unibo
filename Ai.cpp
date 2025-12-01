@@ -1,65 +1,66 @@
-#include "mapparandom.h"
+#include "include/Ai.h"
+#include "include/mapparandom.h"
 using namespace std;
 
 
-enum Nemici{
+enum Nemici{ // come spiegato in mapparandom.cpp
+	mappa_vuota = 0,
+	muro_distr = 1,
+	muro_ind = 2,
+	protag = 3,
 	KamiKaze_Attivo = 4,
 	KamiKaze_Disattivo = 6,
 	Bombarolo_Armato = 5,
 	Bombarolo_Disarmato = 7,
+	bombat1 = 8,
 };
 
-class Ai{ 
 
-
-public:
-
-	int personaggio_x , personaggio_y;
 
 	
-	void checkInactive(mappaRandom &mappa){
-		for (int j = 1 ; j <= 7 ; j++){
-			for (int i = 1 ; i <= 15 ; i++){
-				if ( mappa.mappa[j][i] == KamiKaze_Disattivo ) mappa.mappa[j][i] = KamiKaze_Attivo;
-			}
+void Ai::checkInactive(mappaRandom &mappa){
+	for (int j = 1 ; j <= 7 ; j++){
+		for (int i = 1 ; i <= 15 ; i++){
+			if ( mappa.mappa[j][i] == KamiKaze_Disattivo ) mappa.mappa[j][i] = KamiKaze_Attivo;
 		}
 	}
+}
 	
-	void KamiKaze(mappaRandom &mappa , int &numNemici ){ // 4 kami , 5 bombarolo , 6 e 7 boh
-		for (int j = 1 ; j <= 9 ; j++){
-			for (int i = 1 ; i <= 16 ; i++){
-				if ( mappa.mappa[ j ] [ i ] == KamiKaze_Attivo ){
-					if (mappa.mappa[ j + 1 ] [ i ] == 3 ){
-						mappa.mappa[ j ][ i ] = 8;
+void Ai::KamiKaze(mappaRandom &mappa , int &numNemici ){ // 4 kami , 5 bombarolo , 6 e 7 boh
+	for (int j = 1 ; j <= 9 ; j++){
+		for (int i = 1 ; i <= 16 ; i++){
+			if ( mappa.mappa[ j ] [ i ] == KamiKaze_Attivo ){
+					if (mappa.mappa[ j + 1 ] [ i ] == protag ){
+						mappa.mappa[ j ][ i ] = bombat1;
 						numNemici --;
 					}
-					else if (mappa.mappa[ j - 1 ] [ i ] == 3 ){
-						mappa.mappa[ j ][ i ] = 8;
+					else if (mappa.mappa[ j - 1 ] [ i ] == protag ){
+						mappa.mappa[ j ][ i ] = bombat1;
 						numNemici --;
 					}
-					else if (mappa.mappa[ j ] [ i + 1] == 3 ){
-						mappa.mappa[ j ][ i ] = 8;
+					else if (mappa.mappa[ j ] [ i + 1] == protag ){
+						mappa.mappa[ j ][ i ] = bombat1;
 						numNemici --;
 					}
-					else if (mappa.mappa[ j ] [ i - 1 ] == 3 ){
-						mappa.mappa[ j ][ i ] = 8;
+					else if (mappa.mappa[ j ] [ i - 1 ] == protag ){
+						mappa.mappa[ j ][ i ] = bombat1;
 						numNemici --;
 					}
-					else if  (mappa.mappa[ j + 1 ] [ i ] == 0 ){
+					else if  (mappa.mappa[ j + 1 ] [ i ] == mappa_vuota ){
 						mappa.mappa[ j + 1] [ i ] = KamiKaze_Disattivo;
-						mappa.mappa[ j ][ i ] = 0;
+						mappa.mappa[ j ][ i ] = mappa_vuota;
 					}
-					else if (mappa.mappa[ j - 1 ] [ i ] == 0 ){
+					else if (mappa.mappa[ j - 1 ] [ i ] == mappa_vuota ){
 						mappa.mappa[ j - 1 ] [ i ] = KamiKaze_Disattivo;
-						mappa.mappa[ j ][ i ] = 0;
+						mappa.mappa[ j ][ i ] = mappa_vuota;
 					}
-					else if (mappa.mappa[ j ] [ i + 1] == 0 ){
+					else if (mappa.mappa[ j ] [ i + 1] == mappa_vuota ){
 						mappa.mappa[ j  ] [ i + 1] = KamiKaze_Disattivo;
-						mappa.mappa[ j ][ i ] = 0;
+						mappa.mappa[ j ][ i ] = mappa_vuota;
 					}
-					else if (mappa.mappa[ j ] [ i - 1 ] == 0 ){
+					else if (mappa.mappa[ j ] [ i - 1 ] == mappa_vuota ){
 						mappa.mappa[ j ] [ i - 1 ] = KamiKaze_Disattivo;
-						mappa.mappa[ j ][ i ] = 0;
+						mappa.mappa[ j ][ i ] = mappa_vuota;
 					}
 					
 				}
@@ -67,7 +68,7 @@ public:
 		}
 	}
 	
-	void trovaChar(mappaRandom &mappa){
+	void Ai::trovaChar(mappaRandom &mappa){
 		for (int j = 1 ; j <= 7 ; j++){
 			for (int i = 1 ; i <= 15 ; i++){
 				if ( mappa.mappa[j][i] == 3 ){
@@ -77,7 +78,7 @@ public:
 			}
 		}
 	}
-	void BombaroloArmato(mappaRandom &mappa,int personaggio_x ,int personaggio_y){
+	void Ai::BombaroloArmato(mappaRandom &mappa,int personaggio_x ,int personaggio_y){
 	bool Giamossi[9][17]{
 		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 		{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -146,7 +147,7 @@ public:
 		}
 	}
 
-	void BombaroloDisarmato(mappaRandom &mappa){
+	void Ai::BombaroloDisarmato(mappaRandom &mappa){
 	bool Giamossi[7][15]{
 		{0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 		{0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -181,22 +182,22 @@ public:
 					angolo_y = 7;
 				}
 				if ( ( i < angolo_x && mappa.mappa[j][i + 1 ] == 0 ) && Giamossi[j][i] == false){
-					mappa.mappa[j][i] = 0 ;
+					mappa.mappa[j][i] = mappa_vuota ;
 					mappa.mappa[j][ i + 1 ] = Bombarolo_Disarmato;
 					Giamossi[j][i+1] = true;
 				}
 				else if ( ( i > angolo_x && mappa.mappa[j][i-1] == 0 ) && Giamossi[j][i] == false ){
-					mappa.mappa[j][i] = 0;
+					mappa.mappa[j][i] = mappa_vuota;
 					mappa.mappa[j][ i - 1 ] = Bombarolo_Disarmato;
 					Giamossi[j][i-1] = true;
 				}
 				else if ( ( j < angolo_y && mappa.mappa[j + 1 ][i] == 0 ) && Giamossi[j][i] == false ){
-					mappa.mappa[j][i] = 0;
+					mappa.mappa[j][i] = mappa_vuota;
 					mappa.mappa[j + 1][i] = Bombarolo_Disarmato;
 					Giamossi[j+1][i] = true;
 				}
 				else if ( ( j > angolo_y && mappa.mappa[j - 1][i] == 0 ) && Giamossi[j][i] == false ){
-					mappa.mappa[j][i] = 0;
+					mappa.mappa[j][i] = mappa_vuota;
 					mappa.mappa[j-1][i] = Bombarolo_Disarmato;
 					Giamossi[j-1][i] = true;
 				}
@@ -205,4 +206,4 @@ public:
 	}
 	
 	}
-};
+

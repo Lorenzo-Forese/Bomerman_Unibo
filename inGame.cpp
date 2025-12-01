@@ -1,13 +1,14 @@
 #include <ncurses.h>
-#include "movimento.cpp"
-#include "mapparandom.h"
-#include "finestre.h"
-#include "lang.h"
-#include "Ai.cpp"
+#include "include/inGame.h"
+#include "include/movimento.h"
+#include "include/mapparandom.h"
+#include "include/finestre.h"
+#include "include/lang.h"
+#include "include/Ai.h"
 using namespace std;
 
 
-bool inGame(finestre &finestra , lang &lingua , int &score){
+bool game::inGame(finestre &finestra , lang &lingua , int &score){
 	float difficulty = 0.1;
 	mappaRandom mappa;
 	movimento movimento;

@@ -1,9 +1,10 @@
+#include "include/rappresentazione.h"
+#include "include/finestre.h"
 #include <ncurses.h>
 using namespace std;
 
-short MY_COLOR = 8; //dal 7 in su
 
-void stampaMuro(int x, int y){  //Muro
+void rappresentazione::stampaMuro(int x, int y){  //Muro
 	//attivazione colori
 	init_pair(2, COLOR_BLACK, COLOR_WHITE);  
 	attron(COLOR_PAIR(2));
@@ -28,7 +29,7 @@ void stampaMuro(int x, int y){  //Muro
 	attroff( COLOR_PAIR(2));
 }
 
-void stampaMuroDistr(int x, int y){
+void rappresentazione::stampaMuroDistr(int x, int y){
 	attron (COLOR_PAIR(2) | A_BOLD | A_UNDERLINE );
 
 	mvaddch(y,x, ACS_PLUS);
@@ -50,7 +51,7 @@ void stampaMuroDistr(int x, int y){
 	attroff( COLOR_PAIR(2));
 }
 
-void stampaErba(int x , int y){
+void rappresentazione::stampaErba(int x , int y){
 	init_pair(3, COLOR_WHITE, COLOR_GREEN);
 	attron( COLOR_PAIR(3));
 
@@ -71,7 +72,7 @@ void stampaErba(int x , int y){
 	attroff( COLOR_PAIR(3));
 }
 
-void stampaProtag(int x, int y){
+void rappresentazione::stampaProtag(int x, int y){
 	init_pair(1, COLOR_BLUE, COLOR_GREEN);
 	init_pair(4, COLOR_RED, COLOR_GREEN);
 	attron (COLOR_PAIR(3));
@@ -92,7 +93,7 @@ void stampaProtag(int x, int y){
 	mvaddch(y+2,x+2,ACS_URCORNER);
 }
 
-void stampaKamiKaze(int x, int y){
+void rappresentazione::stampaKamiKaze(int x, int y){
 	attron(COLOR_PAIR(3));
 	mvaddch(y,x+2,ACS_CKBOARD);
 	mvaddch(y,x,ACS_CKBOARD);
@@ -117,7 +118,7 @@ void stampaKamiKaze(int x, int y){
 	
 }
 
-void stampaBombarolo(int x, int y){
+void rappresentazione::stampaBombarolo(int x, int y){
 	init_pair(5, COLOR_MAGENTA , COLOR_GREEN);
 	attron (COLOR_PAIR(5));
 	attron (A_BOLD | COLOR_PAIR(4));
@@ -136,7 +137,7 @@ void stampaBombarolo(int x, int y){
 	mvaddch(y+2,x+2,ACS_URCORNER);
 	attroff(A_BOLD);	
 }
-void stampaBombaroloDisarmato1(int x, int y){
+void rappresentazione::stampaBombaroloDisarmato1(int x, int y){
 	init_pair(5, COLOR_MAGENTA , COLOR_GREEN);
 	attron (COLOR_PAIR(5));
 	mvaddch(y,x, '"');
@@ -154,7 +155,7 @@ void stampaBombaroloDisarmato1(int x, int y){
 	attroff(A_BOLD);	
 }
 
-void stampaBombaroloDisarmato2(int x, int y){
+void rappresentazione::stampaBombaroloDisarmato2(int x, int y){
 	init_pair(5, COLOR_MAGENTA , COLOR_GREEN);
 	attron (COLOR_PAIR(5));
 	mvaddch(y,x+2, '"');
@@ -172,7 +173,7 @@ void stampaBombaroloDisarmato2(int x, int y){
 	attroff(A_BOLD);	
 }
 
-void stampaBomba_1(int x , int y){
+void rappresentazione::stampaBomba_1(int x , int y){
 	init_pair(3, COLOR_WHITE, COLOR_GREEN);
 	attron( COLOR_PAIR(3));
 
@@ -195,7 +196,7 @@ void stampaBomba_1(int x , int y){
 	attroff( COLOR_PAIR(3));
 }
 
-void stampaBomba_2(int x , int y){
+void rappresentazione::stampaBomba_2(int x , int y){
 	init_pair(3, COLOR_WHITE, COLOR_GREEN);
 	init_pair(6, COLOR_BLACK, COLOR_GREEN);
 	attron( COLOR_PAIR(3));
@@ -218,7 +219,7 @@ void stampaBomba_2(int x , int y){
 	attroff( COLOR_PAIR(3));
 }
 
-void stampaFuoco(int x , int y){
+void rappresentazione::stampaFuoco(int x , int y){
 	attron (COLOR_PAIR(4));
 	mvaddch(y,x,ACS_CKBOARD);
 	mvaddch(y,x+1,ACS_CKBOARD);
@@ -236,7 +237,7 @@ void stampaFuoco(int x , int y){
 	
 }
 
-void stampaOro(int x , int y){
+void rappresentazione::stampaOro(int x , int y){
 	init_pair(9, COLOR_YELLOW, COLOR_GREEN);
 	attron( COLOR_PAIR(3));
 
@@ -259,7 +260,7 @@ void stampaOro(int x , int y){
 	attroff( COLOR_PAIR(3));
 }
 
-void stampaLuckyBox(int x, int y , int mult){
+void rappresentazione::stampaLuckyBox(int x, int y , int mult){
 	int price = mult * 50;
 	init_pair(10, COLOR_YELLOW, COLOR_GREEN);  
 	attron(COLOR_PAIR(10));
@@ -286,7 +287,7 @@ void stampaLuckyBox(int x, int y , int mult){
 			
 }
 
-void stampaPorta(int x, int y){
+void rappresentazione::stampaPorta(int x, int y){
 
 	init_pair(11, COLOR_YELLOW, COLOR_BLACK);  
 	attron(COLOR_PAIR(11));
@@ -312,7 +313,7 @@ void stampaPorta(int x, int y){
 			
 }
 
-void stampaCuore(int x, int y){
+void rappresentazione::stampaCuore(int x, int y){
 		attron( COLOR_PAIR(3));
 	
 		mvaddch(y,x,ACS_CKBOARD);
