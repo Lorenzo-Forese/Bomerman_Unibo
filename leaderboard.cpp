@@ -5,6 +5,16 @@
 #include <iostream>
 using namespace std;
 
+//########################################################################
+//### SE NON VEDI I VECCHI PUNTEGGI TOGLI IL COMMENTO DA UNA DELLE DUE ###
+//########################################################################
+
+//string filename = "leaderboard.txt" ;   // SE IL FILE ESEGUIBILE e' NELLO STESSO FOLDER DI leaderboard.txt
+ string filename = "../leaderboard.txt" ;  // SE IL FILE ESEGUIBILE e' IN UN SUBFOLDER COME /build
+
+
+
+
 void leaderboard::ScriviSuLeaderboard( string newName , int newScore){
 
 	const int MAX = 50;        // maximum number of records
@@ -12,7 +22,7 @@ void leaderboard::ScriviSuLeaderboard( string newName , int newScore){
 	int scores[MAX];            // array of integers
 	int count = 0;
 	
-	ifstream infile("leaderboard.txt");
+	ifstream infile( filename );
 	    if (infile) {
 	        while (count < MAX && infile >> names[count] >> scores[count]) {
 	            count++;
@@ -21,7 +31,7 @@ void leaderboard::ScriviSuLeaderboard( string newName , int newScore){
 	    }
 	
 	    // You cannot use std::cin without <iostream>,
-	    // so we simulate the input here — replace with real values.
+	    // so we simulate the input here ÔÇö replace with real values.
 	    // Example:
 	    // strcpy(newName, "Alice");
 	    // newScore = 42;
@@ -64,7 +74,7 @@ void leaderboard::ScriviSuLeaderboard( string newName , int newScore){
 	    }
 	
 	    // ----- Rewrite entire file -----
-	    std::ofstream outfile("leaderboard.txt");
+	    std::ofstream outfile( filename );
 	    for (int i = 0; i < count; i++) {
 	        outfile << names[i] << " " << scores[i] << "\n";
 	    }
@@ -75,7 +85,6 @@ void leaderboard::ScriviSuLeaderboard( string newName , int newScore){
 }
 
 void leaderboard::print_file_in_window(WINDOW *win) {
-	string filename = "leaderboard.txt";
     ifstream infile(filename);
     if (!infile) {
         // If the file could not be opened, display an error message in the window
@@ -102,7 +111,7 @@ void leaderboard::print_file_in_window(WINDOW *win) {
             line = line.substr(0, max_x - 1);  // Truncate line to fit within window
         }
         // Print each line in the window
-        mvwprintw(win, y++, (max_x /2) - line.length(), line.c_str());
+        mvwprintw(win, y++, (max_x /2) - line.length(), "%s" , line.c_str());
         
         wrefresh(win);
     }
