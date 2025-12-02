@@ -14,8 +14,9 @@ int main(){
 	finestre finestra ;
 	selezioni Selezioni ;
 	impostazioni impostazioni;
-	game game;
 	leaderboard leaderboard;
+	game game;
+	
 
 	noecho(); // No rappresentazione degli input da tastiera 
 
