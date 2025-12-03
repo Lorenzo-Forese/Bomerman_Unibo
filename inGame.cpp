@@ -22,7 +22,7 @@ bool game::inGame(finestre &finestra , lang &lingua , int &score){
 	int numNemici = movimento.spawnMultiple_NPC(mappa , startpos , difficulty);
 	mappa.printMappa( finestra , numNemici , score , 0 );
 	refresh();
-	timeout(1000 - (difficulty * 5000) );
+	timeout(1000 - (difficulty * 1000) );
 	while ( true ){
 		mappa.printMappa( finestra , numNemici , score , 0);
 		refresh();
