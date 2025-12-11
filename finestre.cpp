@@ -43,6 +43,8 @@ using namespace std;
 	}
 
 	void finestre::gameWin(lang &lingua ){
+
+		start_color(); // Inizializzazione dei colori del terminale
 		
 		gamewin_posy =  (scr_y - mainwin_y )/2 + 9 ; // Definizione delle coordinate della posizione dell'angolo in alto a sx
 		gamewin_posx =  (scr_x - mainwin_x) /2 + (mainwin_x /8) ;
