@@ -43,15 +43,17 @@ using namespace std;
 	}
 
 	void finestre::gameWin(lang &lingua ){
-		start_color();
-		gamewin_posy =  (scr_y - mainwin_y )/2 + 9 ;
+		
+		gamewin_posy =  (scr_y - mainwin_y )/2 + 9 ; // Definizione delle coordinate della posizione dell'angolo in alto a sx
 		gamewin_posx =  (scr_x - mainwin_x) /2 + (mainwin_x /8) ;
-		finestraGioco = newwin( dim_y , dim_x , gamewin_posy , gamewin_posx );
-		box(finestraGioco , 0 ,0 );
-		move(0,0);
-		mvaddstr( gamewin_posy , gamewin_posx + 7 , lingua.time.c_str() );
-		mvaddstr( gamewin_posy + 2, gamewin_posx + 54 , lingua.money.c_str() );
-		wrefresh (finestraGioco);
+		
+		finestraGioco = newwin( dim_y , dim_x , gamewin_posy , gamewin_posx ); // Definizione della variabile di tipo win
+		box(finestraGioco , 0 ,0 ); // Creazione dei bordi della finestra 
+		
+		mvaddstr( gamewin_posy , gamewin_posx + 7 , lingua.time.c_str() ); // Stampa della scritta "tempo" in base alla lingua corrente
+		mvaddstr( gamewin_posy + 2, gamewin_posx + 54 , lingua.money.c_str() ); // Stampa della scritta "soldi" in base alla lingua corrente
+		
+		wrefresh (finestraGioco); // Refresh interno della finestra da gioco 
 		
 	}
 
