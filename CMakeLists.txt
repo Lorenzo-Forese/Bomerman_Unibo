@@ -1,39 +1,32 @@
-# Set the minimum required version of CMake
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
+project(Bomberman)
 
-# Define the project name and specify the programming language (C++)
-project(Bomberman CXX)
-
-# Set the C++ standard (ensure C++11 or newer for <random>)
 set(CMAKE_CXX_STANDARD 17)
 
-# Find the ncurses package (this will locate the library)
-find_package(Curses REQUIRED)
+# 1. Add the static flag to prevent the __imp_ error
+add_definitions(-DPDC_STATIC_BUILD)
 
-# Add the executable target (list all your source files here)
+# 2. Tell CMake where to find the headers and libraries
+include_directories(C:/msys64/mingw64/include)
+link_directories(C:/msys64/mingw64/lib)
+
+# 3. Add all your source files
 add_executable(Bomberman
-    main.cpp                # Main source file
-    Ai.cpp                  # Other source files
-    finestre.cpp
-    inGame.cpp
-    impostazioni.cpp
-    leaderboard.cpp
-    mapparandom.cpp
-    movimento.cpp
-    rappresentazione.cpp
-    selezioni.cpp
-    lang.cpp
+        main.cpp
+        Ai.cpp
+        finestre.cpp
+        inGame.cpp
+        impostazioni.cpp
+        leaderboard.cpp
+        mapparandom.cpp
+        movimento.cpp
+        rappresentazione.cpp
+        selezioni.cpp
+        lang.cpp
 )
-
-# Include directories where the header files are located (adjust if needed)
-target_include_directories(Bomberman PUBLIC
-    ${PROJECT_SOURCE_DIR}/include  # Assuming headers are in the "include" directory
+target_include_directories(Bomberman PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        C:/msys64/mingw64/include
 )
-
-# Link the ncurses library to the executable
-target_link_libraries(Bomberman PRIVATE
-    ${CURSES_LIBRARIES}  # This will link the ncurses library
-)
-
-# Optionally, if you want to enable Debug/Release builds, add this:
-# set(CMAKE_BUILD_TYPE Release)  # Uncomment for release builds
+# 4. Link the library directly
+target_link_libraries(Bomberman pdcurses)

@@ -1,6 +1,6 @@
 #ifndef RAPPRESENTAZIONE_H
 #define RAPPRESENTAZIONE_H
-#include <ncurses.h>
+#include <ncurses/curses.h>
 #include "finestre.h"
 
 using namespace std;

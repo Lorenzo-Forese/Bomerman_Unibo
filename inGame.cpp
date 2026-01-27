@@ -1,4 +1,4 @@
-#include <ncurses.h>
+#include <ncurses/curses.h>
 #include "include/inGame.h"
 #include "include/movimento.h"
 #include "include/mapparandom.h"

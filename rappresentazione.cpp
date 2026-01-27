@@ -1,6 +1,6 @@
 #include "include/rappresentazione.h"
 #include "include/finestre.h"
-#include <ncurses.h>
+#include <ncurses/curses.h>
 using namespace std;
 
 

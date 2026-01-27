@@ -1,7 +1,7 @@
 #ifndef FINESTRE_H
 #define FINESTRE_H
 #include "lang.h"
-#include <ncurses.h>
+#include <ncurses/curses.h>
 #include <cstring>
 class finestre{
 

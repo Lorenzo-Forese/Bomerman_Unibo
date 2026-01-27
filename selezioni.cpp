@@ -1,4 +1,4 @@
-#include <ncurses.h>
+#include <ncurses/curses.h>
 #include "include/lang.h"
 #include "include/finestre.h"
 #include <cstring>

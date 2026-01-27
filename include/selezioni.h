@@ -1,7 +1,7 @@
 #ifndef SELEZIONI_H
 #define SELEZIONI_H
 #include "lang.h"
-#include <ncurses.h>
+#include <ncurses/curses.h>
 #include <cstring>
 using namespace std;
 

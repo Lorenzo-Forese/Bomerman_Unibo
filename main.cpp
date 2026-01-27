@@ -1,4 +1,4 @@
-#include <ncurses.h>
+#include <ncurses/curses.h>
 #include "include/lang.h"
 #include "include/mapparandom.h"
 #include "include/finestre.h"
@@ -20,7 +20,7 @@ int main(){
 
 	noecho(); // No rappresentazione degli input da tastiera 
 
-	if (!finestra.initwin()){     
+	if (!finestra.initwin()){
 		endwin();
 		return 0;
 	}
