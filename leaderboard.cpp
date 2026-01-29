@@ -1,7 +1,6 @@
 #include "include/finestre.h"
 #include "include/leaderboard.h"
 #include <fstream>
-#include <vector>
 #include <iostream>
 using namespace std;
 
@@ -9,8 +8,8 @@ using namespace std;
 //### SE NON VEDI I VECCHI PUNTEGGI TOGLI IL COMMENTO DA UNA DELLE DUE ###
 //########################################################################
 
-//string filename = "leaderboard.txt" ;   // SE IL FILE ESEGUIBILE e' NELLO STESSO FOLDER DI leaderboard.txt
- string filename = "../leaderboard.txt" ;  // SE IL FILE ESEGUIBILE e' IN UN SUBFOLDER COME /build
+ string filename = "leaderboard.txt" ;   // SE IL FILE ESEGUIBILE e' NELLO STESSO FOLDER DI leaderboard.txt
+//string filename = "../leaderboard.txt" ;  // SE IL FILE ESEGUIBILE e' IN UN SUBFOLDER COME /build
 
 
 

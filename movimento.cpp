@@ -3,22 +3,6 @@
 #include <queue>
 
 using namespace std;
-/*
-struct npc{
-	bool vivo;
-	int pos_x;
-	int pos_y;
-	int type;
-	npc *next;
-};
-typedef npc* p_npc;
-
-struct lista_npc{
-	lista_npc* head;
-	npc* npc_curr;
-};
-typedef lista_npc* plista_npc;
-*/
 
 
 void movimento::piazzaBomba(mappaRandom &mappa , int bomb_y , int bomb_x ){
